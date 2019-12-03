@@ -12,6 +12,14 @@ import DiaryListScreen from './DiaryListScreen';
 import MypageScreen from './MyPageScreen';
 import SettingScreen from './SettingScreen';
 
+/* 
+네이밍 방법
+
+각각의 페이지: '페이지이름 + Screen'
+페이지 묶음: '카테고리 + Stack'
+ */
+
+//회원가입 페이지들로 구성된 SignupStack 생성
 const SignupStack = createStackNavigator(
 	{
 		SignupScreen1,
@@ -24,6 +32,7 @@ const SignupStack = createStackNavigator(
 	}
 );
 
+//일기 목록 페이지들로 구성된 ListStack 생성
 const ListStack = createStackNavigator(
 	{
 		CategoryListScreen,
@@ -31,6 +40,7 @@ const ListStack = createStackNavigator(
 	}
 );
 
+//MainScreen를 포함한 메인메뉴인 Drawer 네비게이션 생성
 const MainStack = createDrawerNavigator(
 	{
 		MainScreen,
@@ -38,25 +48,9 @@ const MainStack = createDrawerNavigator(
 		MypageScreen,
 		SettingScreen,
 	},
-	{
-		// headerMode: on,
-	}
-/* 	{
-		test1: {
-			screen: MainScreen,
-			navigationOptions: {
-				drawerLabel: 'test screen1',
-			},
-		},
-		Test2: {
-			screen: SettingScreen,
-			navigationOptions: {
-				drawerLabel: 'test screen2'
-			},
-		},
-	} */
 );
 
+//LoginScreen과 SignupStack, MainStack을 createStackNavigator로 한 번 더 감싸서 로그인 스크린에서 회원가입, 메인페이지로 각각 이동이 가능하게 함
 const AppNavigator = createStackNavigator(
 	{
 		First: LoginScreen,
@@ -72,17 +66,3 @@ const AppNavigator = createStackNavigator(
 );
 
 export default createAppContainer(AppNavigator);
-
-// const AppNavigator = createStackNavigator(
-// 	{
-// 		First: LoginScreen,
-// 		Signup1: SignupScreen1,
-// 		Signup2: SignupScreen2,
-// 		Main: MainScreen,
-// 	},
-// 	{
-// 		initialRouteName: 'First', headerMode: 'none',
-// 	}
-// );
-
-// export default createAppContainer(AppNavigator);
