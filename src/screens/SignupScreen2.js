@@ -28,7 +28,7 @@ export default class SignUpScreen2 extends Component {
 						</Item>
 					</Form>
 				</View>
-				<View>
+				<View style={styles.buttonContainer}>
 					<Button onPress={() => {navigation.navigate('LoginScreen');}} title={'OK'} />
 				</View>
 			</View>
@@ -45,5 +45,10 @@ const styles = StyleSheet.create({
 		paddingTop: 50,
 		paddingLeft: 30,
 		paddingRight: 40,
-	}
+	},
+	// buttonContainer: {
+	// 	position: "absolute",
+	// 	left: '29%',
+	// 	bottom: 30,
+	// },
 });

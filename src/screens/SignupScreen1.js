@@ -28,7 +28,7 @@ export default class SignUpScreen1 extends Component {
 						<Checkbox text={'전체동의'} fontSize={18} fontWeight={'700'}/>
 					</View>
 					<View style={stylesSignup.list}>
-						<Checkbox text={'이용 약관'} id={'1'} />
+						<Checkbox text={'이용 약관'} />
 						<TouchableOpacity style={stylesSignup.btnMore} onPress={() => {this.setModal1(!this.state.modalVisible1);}}><Text style={stylesSignup.btnMoreText}>[더보기]</Text></TouchableOpacity>
 					</View>
 					<View style={stylesSignup.list}>
@@ -42,7 +42,7 @@ export default class SignUpScreen1 extends Component {
 						<TermOfUse />
 					</View>
 					<View style={stylesSignup.bottomCont}>
-						<Checkbox text={'동의합니다.'} id={'1'} />
+						<Checkbox text={'동의합니다.'} />
 						<View style={{marginTop: 20}}>
 							<Button onPress={() => {this.setModal1(!this.state.modalVisible1);}} title={'확인'} />
 						</View>

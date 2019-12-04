@@ -3,9 +3,6 @@ import {Text, View, TouchableOpacity} from 'react-native';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 
 export default class MainScreen extends Component {
-	// toggleDrawer = () => {
-	// 	this.props.navigationProps.toggleDrawer();
-	// };
 	render() {
 		const {navigation} = this.props;
 		return (

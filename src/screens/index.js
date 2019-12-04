@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-import {createDrawerNavigator} from 'react-navigation-drawer';
+import {DrawerItems, createDrawerNavigator} from 'react-navigation-drawer';
 import LoginScreen from './LoginScreen';
 import SignupScreen1 from './SignupScreen1';
 import SignupScreen2 from './SignupScreen2';
@@ -19,6 +19,35 @@ import SettingScreen from './SettingScreen';
 각각의 페이지: '페이지이름 + Screen'
 페이지 묶음: '카테고리 + Stack'
  */
+
+//메뉴 열기 버튼 생성
+class NavigationDrawerStructure extends Component {
+	toggleDrawer = () => {
+		this.props.navigationProps.toggleDrawer();
+	};
+	render() {
+		return (
+			<View>
+				<TouchableOpacity onPress={this.toggleDrawer.bind(this)}>
+					<Text>메뉴 열기</Text>
+				</TouchableOpacity>
+			</View>
+		);
+	}
+}
+
+//Drawer 헤더 생성
+const DrawerContent = (props) => (
+	<View>
+		<View
+			style={{backgroundColor: 'skyblue', height: 240, alignItems: 'center', justifyContent: 'center',}}>
+			<Text style={{ color: 'white', fontSize: 30 }}>
+				Header
+			</Text>
+		</View>
+		<DrawerItems {...props} />
+	</View>
+)
 
 //회원가입 페이지들로 구성된 SignupStack 생성
 const SignupStack = createStackNavigator(
@@ -39,23 +68,70 @@ const SignupStack = createStackNavigator(
 	}
 );
 
+const MainStack = createStackNavigator(
+	{
+		MainScreen: {
+			screen: MainScreen,
+			navigationOptions: ({navigation}) => ({
+				title: '메인 화면',
+				headerLeft: <NavigationDrawerStructure navigationProps={navigation}/>
+			}),
+		},
+	}
+);
+
+
 //일기 목록 페이지들로 구성된 ListStack 생성
 const ListStack = createStackNavigator(
 	{
-		CategoryListScreen,
+		CategoryListScreen: {
+			screen: CategoryListScreen,
+			navigationOptions: ({navigation}) => ({
+				title: '카테고리',
+				headerLeft: <NavigationDrawerStructure navigationProps={navigation}/>
+			}),
+		},
 		DiaryListScreen,
 	}
 );
 
-//MainScreen를 포함한 메인메뉴인 Drawer 네비게이션 생성
-const MainStack = createDrawerNavigator(
+const MyPageStack = createStackNavigator(
 	{
-		MainScreen,
+		MypageScreen: {
+			screen: MypageScreen,
+			navigationOptions: ({navigation}) => ({
+				title: '마이페이지',
+				headerLeft: <NavigationDrawerStructure navigationProps={navigation}/>
+			}),
+		},
+	}
+);
+
+const SettingStack = createStackNavigator(
+	{
+		SettingScreen: {
+			screen: SettingScreen,
+			navigationOptions: ({navigation}) => ({
+				title: '세팅',
+				headerLeft: <NavigationDrawerStructure navigationProps={navigation}/>
+			}),
+		},
+	}
+);
+
+//MainScreen를 포함한 메인메뉴인 Drawer 네비게이션 생성
+const DrawerStack = createDrawerNavigator(
+	{
+		MainStack,
 		ListStack,
 		CreateScreen,
-		MypageScreen,
-		SettingScreen,
+		MyPageStack,
+		SettingStack,
 	},
+	{
+		// 헤더 컴포넌트
+		contentComponent: DrawerContent,
+	}
 );
 
 //LoginScreen과 SignupStack, MainStack을 createStackNavigator로 한 번 더 감싸서 로그인 스크린에서 회원가입, 메인페이지로 각각 이동이 가능하게 함
@@ -63,7 +139,7 @@ const AppNavigator = createStackNavigator(
 	{
 		First: LoginScreen,
 		Signup: SignupStack,
-		Main: MainStack,
+		Main: DrawerStack,
 	},
 	{
 		defaultNavigationOptions: ({navigation}) => ({
