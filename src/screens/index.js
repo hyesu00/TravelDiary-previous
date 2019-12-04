@@ -9,6 +9,7 @@ import SignupScreen2 from './SignupScreen2';
 import MainScreen from './MainScreen';
 import CategoryListScreen from './CategoryListScreen';
 import DiaryListScreen from './DiaryListScreen';
+import CreateScreen from './CreateScreen';
 import MypageScreen from './MyPageScreen';
 import SettingScreen from './SettingScreen';
 
@@ -22,6 +23,12 @@ import SettingScreen from './SettingScreen';
 //회원가입 페이지들로 구성된 SignupStack 생성
 const SignupStack = createStackNavigator(
 	{
+		LoginScreen: {
+			screen: LoginScreen,
+			navigationOptions: ({navigation}) => ({
+				header: null, /* 어플 첫 실행화면은 헤더을 안보이게 설정 */
+			}),
+		},
 		SignupScreen1,
 		SignupScreen2,
 	},
@@ -45,6 +52,7 @@ const MainStack = createDrawerNavigator(
 	{
 		MainScreen,
 		ListStack,
+		CreateScreen,
 		MypageScreen,
 		SettingScreen,
 	},
