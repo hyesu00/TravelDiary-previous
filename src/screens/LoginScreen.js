@@ -1,17 +1,29 @@
 import React, {Component} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {TouchableOpacity, View, Text, Image, TextInput} from 'react-native';
+import Button from './../components/Button';
+
+
 
 export default class LoginScreen extends Component {
 	render() {
 		return (
-			<View>
-				<Text>로그인 스크린</Text>
-				<TouchableOpacity style={{backgroundColor: 'skyblue'}} onPress={() => this.props.navigation.navigate('SignupScreen1')}>
-					<Text>회원가입 스크린으로 이동하기</Text>
-				</TouchableOpacity>
-				<TouchableOpacity style={{backgroundColor: 'gold'}} onPress={() => this.props.navigation.navigate('Main')}>
-					<Text>메인 스크린으로 이동하기</Text>
-				</TouchableOpacity>
+			<View style={{flex: 1, alignItems: 'center'}}>
+				<Image style={{marginTop: 60, marginBottom: 20}} source={require('../images/logo.png')}/>		
+
+				<View style={{borderRadius: 5, width: 300, height: 40, borderColor: 'gray', borderWidth: 1, overflow:"hidden" }}><TextInput placeholder="Enter Your ID"/></View>
+				<View style={{marginTop: 10, marginBottom: 15, borderRadius: 5, width: 300, height: 40, borderColor: 'gray', borderWidth: 1, overflow:"hidden" }}><TextInput placeholder="Enter Your PW"/></View>
+				
+				<Button width={300} height={43} textColor={'white'} title={'로그인'} />
+
+
+				<View style={{flex: 1, flexDirection: 'row', marginTop: 40}}>
+					<TouchableOpacity style={{width: 100}} onPress={() => this.props.navigation.navigate('SignupScreen1')}>
+						<Text style={{color: '#909090', textAlign: 'center'}}>회원가입</Text>
+					</TouchableOpacity>
+					<TouchableOpacity style={{width: 100}}>
+						<Text style={{color: '#909090', textAlign: 'center'}}>id/pw 찾기</Text>
+					</TouchableOpacity>
+				</View>
 			</View>
 		);
 	}
